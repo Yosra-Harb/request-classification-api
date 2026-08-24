@@ -4,6 +4,7 @@ from pydantic import ValidationError
 from app.config import Settings
 from app.enums import Environment, LogLevel
 
+
 def test_settings_use_default_values():
     settings = Settings(_env_file=None)
 

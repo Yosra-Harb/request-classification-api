@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
+
 from app.config import settings
 from app.main import app
-
 
 client = TestClient(app)
 
@@ -10,9 +10,7 @@ def test_read_root():
     response = client.get("/")
 
     assert response.status_code == 200
-    assert response.json() == {
-        "message": f"{settings.app_name} is running"
-    }
+    assert response.json() == {"message": f"{settings.app_name} is running"}
 
 
 def test_classify_endpoint_returns_classification():
@@ -67,6 +65,7 @@ def test_classify_endpoint_rejects_whitespace_only_text():
 
     assert response.status_code == 422
 
+
 def test_health_check():
     response = client.get("/health")
 
@@ -76,6 +75,7 @@ def test_health_check():
         "version": settings.app_version,
         "environment": settings.environment.value,
     }
+
 
 def test_middleware_does_not_break_request_flow():
     response = client.get("/health")

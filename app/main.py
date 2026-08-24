@@ -1,13 +1,12 @@
-from app.middleware.request_logging import log_requests
 import logging
+
 from fastapi import FastAPI
+
 from app.classifier import classify_request
 from app.config import settings
-from app.schemas import ClassificationRequest, ClassificationResponse
 from app.logging_config import configure_logging
-import time
-
-from fastapi import FastAPI, Request
+from app.middleware.request_logging import log_requests
+from app.schemas import ClassificationRequest, ClassificationResponse
 
 configure_logging()
 
@@ -26,11 +25,10 @@ logger.info(
     settings.app_version,
 )
 
+
 @app.get("/")
 def read_root():
-    return {
-        "message": f"{settings.app_name} is running"
-    }
+    return {"message": f"{settings.app_name} is running"}
 
 
 @app.post("/classify", response_model=ClassificationResponse)
@@ -44,6 +42,7 @@ def classify_endpoint(
         priority=result.priority,
         normalized_text=request.text,
     )
+
 
 @app.get("/health")
 def health_check():

@@ -12,23 +12,20 @@ def contains_keyword(text: str, keyword: str) -> bool:
 def classify_request(text: str) -> ClassificationResult:
     normalized_text = text.lower()
 
-    if (
-        contains_keyword(normalized_text, "password")
-        or contains_keyword(normalized_text, "login")
+    if contains_keyword(normalized_text, "password") or contains_keyword(
+        normalized_text, "login"
     ):
         category = Category.TECHNICAL
         priority = Priority.NORMAL
 
-    elif (
-        contains_keyword(normalized_text, "invoice")
-        or contains_keyword(normalized_text, "payment")
+    elif contains_keyword(normalized_text, "invoice") or contains_keyword(
+        normalized_text, "payment"
     ):
         category = Category.FINANCIAL
         priority = Priority.HIGH
 
-    elif (
-        contains_keyword(normalized_text, "form")
-        or contains_keyword(normalized_text, "document")
+    elif contains_keyword(normalized_text, "form") or contains_keyword(
+        normalized_text, "document"
     ):
         category = Category.ADMINISTRATIVE
         priority = Priority.NORMAL
